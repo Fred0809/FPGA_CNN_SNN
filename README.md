@@ -99,6 +99,9 @@ Overall and per class recognition accuracy on our generated dataset:
 Aaccuracy in our prepared hand-drawn shape dataset:
 
 <p align="center">
+  <img src="Images/preview_hand_drawn.png" width="1000">
+</p>
+<p align="center">
   <img src="Images/accuracy_cnn_handdrawn_shapes.png" width="400">
   <img src="Images/accuracy_snn_handdrawn_shapes.png" width="400">
 </p>
