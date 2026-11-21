@@ -130,8 +130,8 @@ Timing as displayed in Vivado tools:
 
 <table align="center">
   <tr>
-    <td><img src="Images/fpga_cnn_timing.png" width="1000"></td>
-    <td><img src="Images/fpga_snn_timing.png" width="1000"></td>
+    <td><img src="Images/fpga_cnn_timing.png" width="500"></td>
+    <td><img src="Images/fpga_snn_timing.png" width="500"></td>
   </tr>
 </table>
 
