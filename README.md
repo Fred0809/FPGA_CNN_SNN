@@ -43,6 +43,16 @@ A weight is generated for each of the 4 important layers (Convolution, Depthwise
 
 The obtained weights and bias, from model training, are placed into an HLS component in Vitis, which translates the CNN layers into C-language. HLS components can be exported and used in Vivado. The CPU side of the PYNQ board will therefore be responsible for providing the CNN layers logic to the FPGA. The Vivado design will provide the programmable logic for the FPGA. Its main task is to store test images and transfer them into the HLS IP for CNN so the trained network model can test if it recognizes the input image and give a predicted label.  
 
+This is the system architecture as implemented in Vivado block diagram with additional adress editor view
+<p align="center">
+  <img src="Images/cnn_vivado_diagram.jpg" width="1000">
+</p>
+
+This is the system architecture as implemented in Vivado block diagram
+<p align="center">
+  <img src="Images/cnn_vivado_adresses.jpg" width="1000">
+</p>
+
 A UART python script is used for transferring test images from a folder, into the CNN, stored within the FPGA chip. Vitis is used as a bridge for the PYNQ board’s CPU to retrieve the images, sent from UART, and store them within the BRAM of the FPGA so they can be processed by the CNN block, which was generated using the HLS code. CPU is therefore both used for providing the CNN network logic and for transmitting images from UART to the FPGA. Once a test input image has been through the CNN network, the CPU side will send back a raw output value (logit) through UART. This procedure is repeated for all test images. All logit outputs are turned into labels, using argmax, in order to generate a confusion matrix
 A block diagram of the full procedure is showcased in the video. 
 
