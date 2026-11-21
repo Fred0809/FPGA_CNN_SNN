@@ -165,7 +165,7 @@ All the position information is thrown away. This is pretty important in shapes 
 Improvement for the future, keep the grid cells instead of averaging them. Like in SPP (Spatial pyramid pooling), but as we use only one level, we have chosen to refer to it as grid pooling here. The 5x5x8 bins are flattened directly into 200 numbers x 6 shapes = 1200 weights.  Every class has its own weight for every feature in the region. Meaning that every class learns a coarse spatial template. Now the network can tell that rectangles have long narrow cells, where the square comes in a compact block and the same with circles vs ellipses.
 
 <p align="center">
-  <img src="Images/gap_vs_grid.png" width="500">
+  <img src="Images/gap_vs_grid.png" width="1000">
 </p>
 
 A small test was made with 2000 images per shape for 60 epocs, making for 83% accuracy on test score.
@@ -183,7 +183,7 @@ A small test was made with 2000 images per shape for 60 epocs, making for 83% ac
 | Validation accuracy (same data, 60 epochs) | 68% | **83%** |
 
 <p align="center">
-  <img src="Images/big_and_small_shapes.png" width="500">
+  <img src="Images/big_and_small_shapes.png" width="1000">
 </p>
 
 ## Conclusions
