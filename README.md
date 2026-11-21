@@ -91,7 +91,7 @@ The video showcases comparisons between CNN and SNN in more details
 
 Overall and per class recognition accuracy on our generated dataset:
 
-<p align="center">
+<p align="center" style="white-space: nowrap;">
   <img src="Images/accuracy_cnn_normal_shapes.png" width="400">
   <img src="Images/accuracy_snn_normal_shapes.png" width="400">
 </p>
@@ -101,35 +101,35 @@ Aaccuracy in our prepared hand-drawn shape dataset:
 <p align="center">
   <img src="Images/preview_hand_drawn.png" width="1000">
 </p>
-<p align="center">
+<p align="center" style="white-space: nowrap;">>
   <img src="Images/accuracy_cnn_handdrawn_shapes.png" width="400">
   <img src="Images/accuracy_snn_handdrawn_shapes.png" width="400">
 </p>
 
 Latency running on the actual PYNQ board:
 
-<p align="center">
+<p align="center" style="white-space: nowrap;">
   <img src="Images/cnn_latency.png" width="500">
   <img src="Images/snn_latency.png" width="500">
 </p>
 
 Timing as displayed in Vivado tools:
 
-<p align="center">
+<p align="center" style="white-space: nowrap;">
   <img src="Images/fpga_cnn_timing.png" width="500">
   <img src="Images/fpga_snn_timing.png" width="500">
 </p>
 
 Resource utilization of the architecture:
 
-<p align="center">
+<p align="center" style="white-space: nowrap;">
   <img src="Images/fpga_cnn_utilization.png" width="500">
   <img src="Images/fpga_snn_utilization.png" width="500">
 </p>
 
 Power usage summary:
 
-<p align="center">
+<p align="center" style="white-space: nowrap;">
   <img src="Images/fpga_cnn_power_usage.png" width="500">
   <img src="Images/fpga_snn_power_usage.png" width="500">
 </p>
