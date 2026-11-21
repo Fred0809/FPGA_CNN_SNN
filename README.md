@@ -36,7 +36,7 @@ The full CNN design is shown in the video, where every layer is briefly explaine
 Total parameters used = 464 weights + 6 classifier biases + 80 trainable BN + 80 non-trainable BN = 630 
 
 <p align="center">
-  <img src="Images/cnn_architecture.png" width="1000">
+  <img src="Images/cnn_parameters.png" width="1000">
 </p>
 
 A weight is generated for each of the 4 important layers (Convolution, Depthwise, Pointwise and Classifier Layer) alongside a BIAS due to the usage of batch normalization and a class specific bias for the classifier layer). To reduce the workload of the CNN, the images are resized from 120x160 to 60x80 and normalized afterwards so each pixel of an image has a number range of -2 (black) to 2 (white) instead of 0 (black) to 255 (white), which is the standard 8-bit greyscale range. The smaller number range helps speed up the network processing time.
