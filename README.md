@@ -89,8 +89,6 @@ The video showcases comparisons between CNN and SNN in more details
 | FPGA resource utilization   | The most interesting part is the BRAM and DSP usage. SNN mainly uses BRAM for its network while CNN uses a mix of BRAM and DSP as the DSP parts are needed for all the math calculations within the network.    |
 | Power/Energy for post synthesis Data    | Both networks use similar power with CNN using slightly more due to the DSP’s it utilizes. CNN at 1.711 W and SNN at 1.573 W.    |
 
-( images from vivado of resourses utilisation plus somethiugn else about performance maybe )
-
 Overall and per class recognition accuracy on our generated dataset:
 
 <p align="center">
@@ -108,8 +106,8 @@ Aaccuracy in our prepared hand-drawn shape dataset:
 Latency running on the actual PYNQ board:
 
 <p align="center">
-  <img src="Images/fpga_cnn_latency.png" width="500">
-  <img src="Images/fpga_snn_latency.png" width="500">
+  <img src="Images/cnn_latency.png" width="500">
+  <img src="Images/snn_latency.png" width="500">
 </p>
 
 Timing as displayed in Vivado tools:
@@ -144,6 +142,10 @@ All the position information is thrown away. This is pretty important in shapes 
 
 Improvement for the future, keep the grid cells instead of averaging them. Like in SPP (Spatial pyramid pooling), but as we use only one level, we have chosen to refer to it as grid pooling here. The 5x5x8 bins are flattened directly into 200 numbers x 6 shapes = 1200 weights.  Every class has its own weight for every feature in the region. Meaning that every class learns a coarse spatial template. Now the network can tell that rectangles have long narrow cells, where the square comes in a compact block and the same with circles vs ellipses.
 
+<p align="center">
+  <img src="Images/gap_vs_grid.png" width="500">
+</p>
+
 A small test was made with 2000 images per shape for 60 epocs, making for 83% accuracy on test score.
 
 | Metric | GAP (old) | Grid Pooling (new) |
@@ -158,9 +160,15 @@ A small test was made with 2000 images per shape for 60 epocs, making for 83% ac
 | Vivado LUT / FF / BRAM / DSP | 4,647 / 5,525 / 34.5 / 86 | 4,548 / 5,677 / 37.5 / 83 |
 | Validation accuracy (same data, 60 epochs) | 68% | **83%** |
 
+<p align="center">
+  <img src="Images/big_and_small_shapes.png" width="500">
+</p>
 
 ## Conclusions
 
 dunno lol
 
+<p align="center">
+  <img src="Images/IMPORTANT_DONT_DELETE.png" width="500">
+</p>
 
