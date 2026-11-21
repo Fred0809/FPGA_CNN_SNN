@@ -91,7 +91,76 @@ The video showcases comparisons between CNN and SNN in more details
 
 ( images from vivado of resourses utilisation plus somethiugn else about performance maybe )
 
-Hypothesis + Result table.
-I also talked about the dataset, i showed the results of the hardware and the confusion matrix. we can let claude generate one image for separate class accuracy and discuss why it is getting confused(round edges for cnn and rectangle and ellipse for the snn), latency was also mentioned with the uart transfer time. I talked about the hardware results and the time in the conclusion video. We have space to talk for the GAP vs Grid pooling here. 0,65 pages + table 0,3 pages.
+Overall and per class recognition accuracy on our generated dataset:
+
+<p align="center">
+  <img src="Images/accuracy_cnn_normal_shapes.png" width="400">
+  <img src="Images/accuracy_snn_normal_shapes.png" width="400">
+</p>
+
+Aaccuracy in our prepared hand-drawn shape dataset:
+
+<p align="center">
+  <img src="Images/accuracy_cnn_handdrawn_shapes.png" width="400">
+  <img src="Images/accuracy_snn_handdrawn_shapes.png" width="400">
+</p>
+
+Latency running on the actual PYNQ board:
+
+<p align="center">
+  <img src="Images/fpga_cnn_latency.png" width="500">
+  <img src="Images/fpga_snn_latency.png" width="500">
+</p>
+
+Timing as displayed in Vivado tools:
+
+<p align="center">
+  <img src="Images/fpga_cnn_timing.png" width="500">
+  <img src="Images/fpga_snn_timing.png" width="500">
+</p>
+
+Resource utilization of the architecture:
+
+<p align="center">
+  <img src="Images/fpga_cnn_utilization.png" width="500">
+  <img src="Images/fpga_snn_utilization.png" width="500">
+</p>
+
+Power usage summary:
+
+<p align="center">
+  <img src="Images/fpga_cnn_power_usage.png" width="500">
+  <img src="Images/fpga_snn_power_usage.png" width="500">
+</p>
 
 ## Future improvements
+
+GAP (Global average pool) vs Grid Pooling
+The image is divided into a 5x5 grid with information of 8 different features. With the global average pooling (AvgPool) averages all 25 bins together, leaving only 8 learned informational values about features like corner/curves/straight lines and so forth. This is all that the classifier has to go on. 
+
+With 8 features x 6 shapes = 48 weights + 6 biases = 54 learned numbers in total.
+
+All the position information is thrown away. This is pretty important in shapes where the only defining difference is stretching, like the rectangle and the ellipse vs the square and rectangle. The network only knows what features exist, but not where. 
+
+Improvement for the future, keep the grid cells instead of averaging them. Like in SPP (Spatial pyramid pooling), but as we use only one level, we have chosen to refer to it as grid pooling here. The 5x5x8 bins are flattened directly into 200 numbers x 6 shapes = 1200 weights.  Every class has its own weight for every feature in the region. Meaning that every class learns a coarse spatial template. Now the network can tell that rectangles have long narrow cells, where the square comes in a compact block and the same with circles vs ellipses.
+
+A small test was made with 2000 images per shape for 60 epocs, making for 83% accuracy on test score.
+
+| Metric | GAP (old) | Grid Pooling (new) |
+|----------|----------|-------------------|
+| Classifier input | 8 values (feature averages) | 200 values (5×5 regions × 8 features) |
+| Spatial information kept | none | coarse 5×5 layout |
+| Classifier weights + biases | 8×6 + 6 = 54 | 200×6 + 6 = 1,206 |
+| Trainable parameters, whole network | 550 | 1,702 |
+| Classifier weight memory (16-bit) | 108 bytes | ~2.4 KB |
+| Classifier latency (HLS) | 249 cycles ≈ 2.5 µs | 228 cycles ≈ 2.3 µs |
+| Whole CNN latency | 1.075 ms (HLS) | 1.099 ms (HLS) |
+| Vivado LUT / FF / BRAM / DSP | 4,647 / 5,525 / 34.5 / 86 | 4,548 / 5,677 / 37.5 / 83 |
+| Validation accuracy (same data, 60 epochs) | 68% | **83%** |
+
+
+## Conclusions
+
+dunno lol
+
+
