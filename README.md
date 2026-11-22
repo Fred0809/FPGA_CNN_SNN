@@ -1,6 +1,14 @@
 # FPGA Based CNN and SNN Implementation
 
-Bigger report with explanation. Basically simmilar to report but more loosely written
+Project team:
+
+- Mathias Rønne ( [Mrej112](https://github.com/Mrej112) )
+
+- Søren Stückler ( [sorenstuckler](https://github.com/sorenstuckler) )
+
+- Jakub Rewak ( [Fred0809](https://github.com/Fred0809) )
+
+- Ioannis Zagkas ( [Trixompalas](https://github.com/Trixompalas) )
 
 ## Summary of the vision task
 
@@ -188,7 +196,7 @@ A small test was made with 2000 images per shape for 60 epocs, making for 83% ac
 
 ## Conclusions
 
-dunno lol
+The networks have close accuracy and from the matrixes we can see that CNN is doing better at round shapes, almost at perfection, while SNN has better accuracy distinguish rectangles from squares because of the coarse map of 12x16 that locate where the spikes are. The SNN weakest are the ellipse and rectangle because it confuses it.
 
 <p align="center">
   <img src="Images/IMPORTANT_DONT_DELETE.png" width="500">
