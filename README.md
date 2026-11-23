@@ -99,11 +99,11 @@ The video showcases comparisons between CNN and SNN in more details
 
 | Comparison Topic | Comment |
 |:-------------|:--------|
-| Overall and per class recognition | SNN had an easier time identifying rectangles and squares compared to CNN. CNN was however slightly better at recognizing circular shapes such as circles, figure eight and ellipses. Both networks weren’t good at identifying the handdrawn shapes, which could point to potential overfitting while training both networks. |
-| Interference Latency    | SNN is approx. six times faster on average than the CNN due to the CNN requiring a lot of mathematical computation to process each image in the network, during training. |
-| FPGA Timing    | Biggest timing difference is the Worst Negative Slack (WNS) where a signal reaches its destination with 3.448 ns to spare. Both networks don't have a negative value for slack so their FPGA designs meet timing requirements. CNN also has more endpoints due to DSP’s requiring more data paths.     |
-| FPGA resource utilization   | The most interesting part is the BRAM and DSP usage. SNN mainly uses BRAM for its network while CNN uses a mix of BRAM and DSP as the DSP parts are needed for all the math calculations within the network.    |
-| Power/Energy for post synthesis Data    | Both networks use similar power with CNN using slightly more due to the DSP’s it utilizes. CNN at 1.711 W and SNN at 1.573 W.    |
+| Overall and per class recognition | SNN had an easier time identifying rectangles and squares compared to CNN. CNN was however better at recognizing circular shapes such as circles, figure eight and ellipses. SNN is also biased towards figure eight in the handdrawn shapes. Both networks weren’t good at identifying the handdrawn shapes, which could point to potential overfitting or need for a different data set while training both networks. |
+| Interference Latency    | SNN is approx. five times faster on average than the CNN due to the CNN requiring a lot of mathematical computation to process each image in the network, during training. CNN average: 60.95 ms vs SNN average: 11.85 ms. SNN’s latency does however vary much more at its min/max latency range. |
+| FPGA Timing    | Biggest timing difference is the Worst Negative Slack (WNS) where a signal reaches its destination with 3.448 ns to spare. Both networks don't have a negative value for slack so their FPGA designs meet timing requirements. CNN also has more endpoints due to DSP’s requiring more data paths. The endpoint difference also highlights that CNN has a bigger design than SNN.|
+| FPGA resource utilization   | The most interesting part is the BRAM and DSP usage. SNN mainly uses BRAM(71 for its network while CNN uses a mix of BRAM and DSP as the DSP parts are needed for all the math calculations within the network. The SNN is mainly limited by the BRAM on the pynq board while the CNN is limited both by the BRAM and the DSPs available on the board. |
+| Power/Energy for post synthesis Data    | Both networks use similar power with CNN using slightly more due to the DSP’s it utilizes. CNN at 1.711 W and SNN at 1.573 W. Taking the latency into account, the SNN is also much more energy efficient: CNN energy usage: 1.711 W * 60.95 ms = 104.28 mJ SNN energy usage: 1.573 W * 11.85 ms = 18.64 mJ   |
 
 Overall and per class recognition accuracy on our generated dataset:
 
@@ -203,7 +203,8 @@ A small test was made with 2000 images per shape for 60 epocs, making for 83% ac
 
 ## Conclusions
 
-Overall both networks turned out to have good and simmilar accuracy. From the confusion matrices we can see that CNN is doing much better at round shapes, almost perfect, while SNN has better accuracy in distinguishing rectangles from squares because of the coarse map of 12x16 that locate where the spikes are. The SNN weaknesses are the ellipse and rectangle.
+We have successfully made a CNN and SNN network based on guest lectures with minor changes. These networks have been tested on a self-generated dataset of 6 different shapes. Both networks turned out to have good and similar accuracy (~80%). From the confusion matrices, we can see that CNN is doing much better at round shapes, almost perfect, while SNN has better accuracy in distinguishing rectangles from squares because of the coarse map of 12x16 that locates where the spikes are. The SNN weaknesses are the ellipse and rectangle. CNN weaknesses are squares and rectangles. Neither network handles our hand-drawn shapes well, so a more varied dataset, larger shapes, and a different kind of pooling for our CNN network are our next steps for future work.
+
 
 <p align="center">
   <img src="Images/IMPORTANT_DONT_DELETE.png" width="500">
